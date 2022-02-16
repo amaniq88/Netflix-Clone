@@ -3,17 +3,21 @@ import { useState } from 'react';
 import ModalMovie from '../ModalMovie/ModalMovie';
 
 function MovieList(props) {
-    console.log(props.memes.results);
     const [showModal, setShowModal] = useState(false);
     const [meme, setMeme] = useState();
+    console.log(props.memes.results);
     return (
         <>
             <CardGroup style={{ display: "flex", justifyContent: "space-around" }}>
-                {
+                {    
+
                     props.memes.results.map(meme => {
+                       
                         return <div key={meme.id}>
                             <Card key={meme.id} >
-                                <Card.Img variant="top" src={meme.poster_path} />
+                            
+                                <Card.Img variant="top" src= {`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${meme.poster_path}`} />
+                                
                                 <Card.Body>
                                     <Card.Title>{meme.title}</Card.Title>
                                     <Card.Text>
@@ -29,6 +33,7 @@ function MovieList(props) {
                     })
                 }
             </CardGroup>
+       
             {showModal && <ModalMovie show={showModal} meme={meme} handleColse={() => { setShowModal(false) }} updateCaption={props.updateCaption} />}
         </>
     )
